@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <style>
+        body {
+            display: flex;
+            user-select: none;
+        }
+
+        .main-box {
+            margin: auto;
+            color: white;
+            font-weight: bold;
+            font-family: sans-serif;
+            display: flex;
+            flex-flow: column;
+            background: purple;
+            align-items: center;
+            padding: 50px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="main-box">
+        <span>Texto</span>
+        <button class="boton">Boton 1</button>
+    </div>
+</body>
+<script>
+    $(() => {
+
+        $("body").hide()
+        window.addEventListener("message", function(event){
+            if (event.data.prueba != undefined) {
+                let status = event.data.prueba
+                if (status) {
+                    $("body").show()
+                } else {
+                    $("body").hide()
+                }
+            }
+        })
+
+        $(".boton").click(function(){
+           $.post("https://PRBNUI/boton", JSON.stringify({ prueba: "hola" }))
+           $("body").hide()
+        })
+    })
+</script>
+</html>
